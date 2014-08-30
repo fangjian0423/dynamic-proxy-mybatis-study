@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.format.dynamicproxy.mybatis.dao.UserDao">
+
+    <select id="getById" parameterType="int" resultType="org.format.dynamicproxy.mybatis.bean.User">
+        SELECT * FROM users WHERE id = #{id}
+    </select>
+
+    <insert id="add" parameterType="org.format.dynamicproxy.mybatis.bean.User">
+        INSERT INTO users(name, age, birthday) values(#{name}, #{age}, #{birthday})
+    </insert>
+
+    <update id="update" parameterType="org.format.dynamicproxy.mybatis.bean.User">
+        UPDATE users
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="birthday != null and birthday != ''">
+                birthday = #{birthday}
+            </if>
+        </trim>
+        where id = ${id}
+    </update>
+
+    <delete id="delete" parameterType="org.format.dynamicproxy.mybatis.bean.User">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+    
+    <select id="getAll" resultType="org.format.dynamicproxy.mybatis.bean.User">
+        SELECT * FROM users
+    </select>
+
+
+
+</mapper>
