@@ -10,11 +10,18 @@
         <id column="STATUS" property="status" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
     </resultMap>
 
-    <select id="getById" parameterType="int" resultType="org.format.dynamicproxy.mybatis.bean.User">
+    <parameterMap id="robotParamMap" type="org.format.dynamicproxy.mybatis.bean.Robot">
+        <parameter property="id" javaType="integer"/>
+        <parameter property="age" javaType="integer"/>
+        <parameter property="name" javaType="string"/>
+        <parameter property="status" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    </parameterMap>
+
+    <select id="getById" parameterType="int" resultMap="robotMap">
         SELECT * FROM robot WHERE id = #{id}
     </select>
 
-    <insert id="add" parameterType="org.format.dynamicproxy.mybatis.bean.User">
+    <insert id="add" parameterType="org.format.dynamicproxy.mybatis.bean.Robot">
         INSERT INTO robot(NAME, AGE, STATUS) values(#{name}, #{age}, #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
     </insert>
 
