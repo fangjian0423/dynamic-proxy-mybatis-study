@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.format.dynamicproxy.mybatis.dao.RobotDao">
+
+    <resultMap id="robotMap" type="org.format.dynamicproxy.mybatis.bean.Robot">
+        <id column="ID" property="id"/>
+        <id column="AGE" property="age"/>
+        <id column="NAME" property="name"/>
+        <id column="STATUS" property="status" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    </resultMap>
+
+    <select id="getById" parameterType="int" resultType="org.format.dynamicproxy.mybatis.bean.User">
+        SELECT * FROM robot WHERE id = #{id}
+    </select>
+
+    <insert id="add" parameterType="org.format.dynamicproxy.mybatis.bean.User">
+        INSERT INTO robot(NAME, AGE, STATUS) values(#{name}, #{age}, #{status,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler})
+    </insert>
+
+</mapper>
